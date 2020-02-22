@@ -1,0 +1,46 @@
+---
+title: "Explore"
+author: "Jacob Pettit (Decision Support)"
+date: "2/22/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(dplyr)
+
+
+df<- read.csv("zooAnimal_medianLifeExpectancy_Jul2018 .csv")
+
+```
+
+
+```{r}
+Hmisc::describe(df)
+
+str(df)
+
+df_agg <- df %>% group_by(TaxonClass) %>%
+  summarise(Avg_Male_Lif_Exp = mean(Male.MLE,na.rm = T),
+            Avg_Female_Lif_Exp = mean(Male.MLE, na.rm = T)
+                                          
+                                          )
+
+```
+
+## 
+
+```{r}
+
+```
+
+
+
+
+
+
+
+
+
+
