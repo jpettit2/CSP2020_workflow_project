@@ -21,9 +21,18 @@ Hmisc::describe(df)
 
 str(df)
 
+
+df$Female.CI...upper <- as.numeric(df$Female.CI...upper)
+
+
 df_agg <- df %>% group_by(TaxonClass) %>%
   summarise(Avg_Male_Lif_Exp = mean(Male.MLE,na.rm = T),
-            Avg_Female_Lif_Exp = mean(Male.MLE, na.rm = T)
+            Avg_Female_Lif_Exp = mean(Male.MLE, na.rm = T),
+            Avg_Male_l = mean(Male.CI...lower, na.rm = T),
+            Avg_Male_u = mean(Male.CI...upper, na.rm = T),
+            Avg_Female_l = mean(Female.CI...lower, na.rm = T),
+            Avg_Female_u = mean(Female.CI...upper, na.rm = T),
+            
                                           
                                           )
 
@@ -35,9 +44,11 @@ df_agg <- df %>% group_by(TaxonClass) %>%
 library(ggplot2)
 library(tidyr)
 
+#,Avg_Male_l,Avg_Male_u,Avg_Female_l, Avg_Female_u
+
 df_long <- df_agg %>% pivot_longer(cols = c(Avg_Male_Lif_Exp, Avg_Female_Lif_Exp))
 
-ggplot(df_long,aes(df_long$TaxonClass, df_long$value))+geom_point()+facet_wrap(~name)+coord_flip()+
+ggplot(df_long,aes(df_long$TaxonClass, df_long$value))+geom_point()+facet_wrap(~name)+coord_flip()
 
 
 ```
