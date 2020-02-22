@@ -32,6 +32,13 @@ df_agg <- df %>% group_by(TaxonClass) %>%
 ## 
 
 ```{r}
+library(ggplot2)
+library(tidyr)
+
+df_long <- df_agg %>% pivot_longer(cols = c(Avg_Male_Lif_Exp, Avg_Female_Lif_Exp))
+
+ggplot(df_long,aes(df_long$TaxonClass, df_long$value))+geom_point()+facet_wrap(~name)+coord_flip()+
+
 
 ```
 
